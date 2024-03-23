@@ -1,0 +1,5 @@
+1 Gym 
+2 BadmintonCourt
+3 ChessRoom
+4 YogaRoom
+5 IndoorTrack 
