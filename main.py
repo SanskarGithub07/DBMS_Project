@@ -87,9 +87,7 @@ mycursor.execute("""
         booked_by INT NOT NULL,
         start_time DATETIME NOT NULL,
         end_time DATETIME NOT NULL,
-        PRIMARY KEY (a_id, booked_by),
-        FOREIGN KEY (a_id) REFERENCES area(a_id),
-        FOREIGN KEY (booked_by) REFERENCES student(roll_num)
+        PRIMARY KEY (a_id, booked_by)
     )
 """)
 
