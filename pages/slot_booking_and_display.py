@@ -24,6 +24,7 @@ def main():
     maincursor = create_db_cursor(mydb)
     #maincursor.execute("DROP TABLE IF EXISTS area")
 
+    ## Post initialisation 
     # Display the form to add a new slot
     st.write("## Add Slot Booking")
     with st.form(key='add_slot_form'):

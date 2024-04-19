@@ -9,6 +9,20 @@ def insert_area_data(mycursor, a_id, a_name):
     val = (a_id, a_name)
     mycursor.execute(sql, val)
 
+# Function to update area name in the database
+def update_area_name(mycursor, a_id, new_name):
+    query = "UPDATE area SET a_name = %s WHERE a_id = %s"
+    values = (new_name, a_id)
+    mycursor.execute(query, values)
+    st.success("Area name updated successfully.")
+
+# Function to delete area from the database
+def delete_area(mycursor, a_id):
+    query = "DELETE FROM area WHERE a_id = %s"
+    values = (a_id,)
+    mycursor.execute(query, values)
+    st.success("Area deleted successfully.")
+
 # Function to fetch area data from the database
 def fetch_areas(mycursor):
     query = "SELECT a_id, a_name FROM area"
@@ -49,6 +63,25 @@ def main():
         st.write(areas_df)
     else:
         st.write("No areas found.")
+
+    # Display the dropdown menu to select an area
+    selected_area = st.selectbox("Select an area:", [f"{a_id}: {a_name}" for a_id, a_name in areas])
+
+    # Perform actions based on user selection
+    if selected_area:
+        a_id = int(selected_area.split(":")[0])
+        action = st.selectbox("Select action:", ["Update Name", "Delete"])
+
+        if action == "Update Name":
+            new_name = st.text_input("Enter new name:")
+            if st.button("Update"):
+                update_area_name(maincursor, a_id, new_name)
+                mydb.commit()
+
+        elif action == "Delete":
+            if st.button("Delete"):
+                delete_area(maincursor, a_id)
+                mydb.commit()
 
     # Close the database cursor and connection
     maincursor.close()
