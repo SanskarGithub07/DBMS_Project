@@ -9,6 +9,18 @@ mydb = mysql.connector.connect(
     password="mySQL_DevX@123",
 )
 
+if "logged_in" not in st.session_state:
+    st.experimental_set_query_params(logged_in=False)
+
+if st.session_state.logged_in:
+    st.title("Welcome to the Main Page")
+    st.write("You are logged in!")
+else:
+    st.write("Please log in to access the main page.")
+    login_button = st.button("Go to Login Page")
+    if login_button:
+        st.experimental_set_query_params(logged_in=False)
+            
 # Function to insert data into the student table
 def insert_student_data(firstname, lastname, rollnumber, dept, year, email_id):
     mycursor = mydb.cursor()
@@ -88,11 +100,12 @@ mycursor.execute("""
         start_time DATETIME NOT NULL,
         end_time DATETIME NOT NULL,
         PRIMARY KEY (a_id, booked_by),
-        FOREIGN KEY (a_id) REFERENCES area(a_id),
-        FOREIGN KEY (booked_by) REFERENCES student(roll_num)
     )
 """)
 
+      #  FOREIGN KEY (a_id) REFERENCES area(a_id),
+      #  FOREIGN KEY (booked_by) REFERENCES student(roll_num)
+      
 # Streamlit form to accept user inputs
 st.title("Student Information Form")
 
@@ -140,6 +153,7 @@ for row in data:
 #         insert_slot_data(area_id, start_time, end_time)
 
 place = st.text_input("Enter ISC Place to view slot timings.")
+
 
 
 # Commit the changes and close the cursor and connection

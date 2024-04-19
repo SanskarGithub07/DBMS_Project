@@ -1,0 +1,3 @@
+Password
+Slot booking me roll number in the form of username 
+Roll number more than 10 digits
