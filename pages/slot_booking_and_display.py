@@ -9,7 +9,6 @@ def insert_slot_data(mycursor, a_id, booked_by, start_time, end_time):
     val = (a_id, booked_by, start_time, end_time)
     mycursor.execute(sql, val)
 
-
 # Function to fetch slot data from the database
 def fetch_slots(mycursor):
     query = "SELECT * FROM slot"
@@ -21,9 +20,9 @@ def fetch_slots(mycursor):
 def main():
     # Connect to the database
     mydb = connect_to_database()
-
     # Create a database cursor
     maincursor = create_db_cursor(mydb)
+    #maincursor.execute("DROP TABLE IF EXISTS area")
 
     # Display the form to add a new slot
     st.write("## Add Slot Booking")

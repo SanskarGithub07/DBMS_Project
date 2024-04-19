@@ -8,7 +8,7 @@ def connect_to_database():
         host="localhost",
         user="root",
         password="mySQL_DevX@123",
-        database="projectDB"  # Specify the database name here
+        database="projectDB2"  # Specify the database name here
     )
     return mydb
 
